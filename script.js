@@ -59,17 +59,31 @@ const accounts = [
   account6,
   account7,
 ];
-const names = accounts.map(acc => acc.owner);
 
-console.log(names[4]);
+// const names = accounts.map(function(name, i)
+// {
+//   return `${name.owner} ${i + 1}`;
+// });
+// console.log(names);
 
-const passwords = accounts.map(acc => acc.pin);
+// const userId = [
+//   names[0],
+//   names[1],
+//   names[2],
+//   names[3],
+//   names[4],
+//   names[5],
+//   names[6],
+// ];
+// console.log(userId);
 
-console.log(passwords[4]);
+// const passwords = accounts.map(acc => acc.pin);
 
-const checkPassword = function (password) {
-  return passwords.includes(password);
-}
+// console.log(passwords[4]);
+
+// const checkPassword = function (password) {
+//   return passwords.includes(password);
+// }
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -127,12 +141,25 @@ const createUsernames = function (accs) {
 
 createUsernames(accounts);
 
+
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov = 0) => acc + mov, 0);
   labelBalance.innerHTML = `${balance} EUR`;
 };
 calcDisplayBalance(account7.movements);
 
+const calcDisplaySummary = function (movements) {
+  const incomes = movements.filter(mov => mov > 0).reduce((acc, mov = 0) => acc + mov, 0);
+  labelSumIn.innerHTML = `${incomes}€`;
+}
+
+calcDisplaySummary(account7.movements);
+
+const calcDisplaySumOut = function (movements) {
+  const incomes = movements.filter(mov => mov < 0).reduce((acc, mov = 0) => acc + mov, 0);
+  labelSumOut.textContent = `${incomes}€`;
+}
+calcDisplaySumOut(account7.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -149,26 +176,26 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 /////////////////////////////////////////////////
 // filter
 
-const depositosFunction = movements.filter(function (mov) {
-  return mov > 0;
-});
-const depositos = movements.filter(mov => mov > 0);
-console.log(depositos);
+// const depositosFunction = movements.filter(function (mov) {
+//   return mov > 0;
+// });
+// const depositos = movements.filter(mov => mov > 0);
+// console.log(depositos);
 
-const retiradasfunction = movements.filter(function (mov) {
-  return mov < 0;
-});
-const retiradas = movements.filter(mov => mov < 0);
-console.log(retiradasfunction);
+// const retiradasfunction = movements.filter(function (mov) {
+//   return mov < 0;
+// });
+// const retiradas = movements.filter(mov => mov < 0);
+// console.log(retiradasfunction);
 
-// reduce
-const sumaFunction = movements.reduce(function (acc, mov) {
-  return acc + mov;
-}, 0);
-console.log(sumaFunction);
-// arrow function
-const suma = movements.reduce((acc, mov) => acc + mov, 0);
-console.log(suma);
+// // reduce
+// const sumaFunction = movements.reduce(function (acc, mov) {
+//   return acc + mov;
+// }, 0);
+// console.log(sumaFunction);
+// // arrow function
+// const suma = movements.reduce((acc, mov) => acc + mov, 0);
+// console.log(suma);
 
 
 // MAP - key value pairs
@@ -186,7 +213,7 @@ console.log(suma);
 //     return account.owner === username;
 //   }
 //   );
-//   if (account.pin === pin) {
+//   if (account.pin === pin && account !== undefined) {
 //     return account;
 //   }
 //   return null;
