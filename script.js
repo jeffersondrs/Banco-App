@@ -173,6 +173,28 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+const data = new Date();
+
+function horario() {
+  var data = new Date();
+  var horas = data.getHours();
+  var minutos = data.getMinutes();
+  var segundos = data.getSeconds();
+  var relogio = document.querySelector('#relogio');
+
+  if (minutos < 10) {
+    minutos = '0' + minutos;
+  }
+
+  if (segundos < 10) {
+    segundos = '0' + segundos;
+  }
+
+  relogio.innerHTML = horas + ':' + minutos + ':' + segundos;
+};
+setInterval(horario, 1000);
+horario();
+
 /////////////////////////////////////////////////
 // filter
 
