@@ -94,7 +94,7 @@ nav {
   gap: 2rem;
 
   /* NOTE This creates the fade in/out anumation */
-  opacity: 1;
+  opacity: 0;
   transition: all 1s;
 }
 
@@ -299,7 +299,7 @@ h2 {
 #relogio{
   font-size: 2.5rem;
   font-weight: bolder;
-  color: rgb(0, 110, 6);
+  color: rgb(255, 255, 255);
   text-align: center;
   margin-right: 1rem;
 }

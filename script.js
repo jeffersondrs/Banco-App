@@ -128,7 +128,7 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
+
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -141,25 +141,40 @@ const createUsernames = function (accs) {
 
 createUsernames(accounts);
 
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+  console.log(currentAccount);
+  if(currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.innerHTML = `Welcome ${currentAccount.owner.split(' ')[0]}`;
+    containerApp.style.opacity = 1;
+    displayMovements(currentAccount.movements);
+    calcDisplayBalance(currentAccount.movements);
+    calcDisplaySummary(currentAccount.movements);
+    calcDisplaySumOut(currentAccount.movements);
+  }
+});
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov = 0) => acc + mov, 0);
   labelBalance.innerHTML = `${balance} EUR`;
 };
-calcDisplayBalance(account7.movements);
+
 
 const calcDisplaySummary = function (movements) {
   const incomes = movements.filter(mov => mov > 0).reduce((acc, mov = 0) => acc + mov, 0);
   labelSumIn.innerHTML = `${incomes}€`;
 }
 
-calcDisplaySummary(account7.movements);
+
 
 const calcDisplaySumOut = function (movements) {
   const incomes = movements.filter(mov => mov < 0).reduce((acc, mov = 0) => acc + mov, 0);
   labelSumOut.textContent = `${incomes}€`;
 }
-calcDisplaySumOut(account7.movements);
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -172,8 +187,6 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-const data = new Date();
 
 function horario() {
   var data = new Date();
@@ -195,6 +208,25 @@ function horario() {
 setInterval(horario, 1000);
 horario();
 
+const color = [
+  {color: '#FFA500'},
+  {color: '#0000FF'},
+  {color: '#4B0082'},
+  {color: '#9400D3'},
+  {color: '#FF00FF'},
+  {color: '#FFA500'},
+  {color: '#055000'},
+  {color: '#0444FF'},
+  {color: '#eee082'},
+  {color: '#FF0555'},
+  {color: '#FF786F'},
+];
+function bodyColor(){
+  const randomColor = Math.floor(Math.random() * color.length);
+document.body.style.backgroundColor = color[randomColor].color;
+console.log(randomColor);
+}
+setInterval(bodyColor, 60000);
 /////////////////////////////////////////////////
 // filter
 
